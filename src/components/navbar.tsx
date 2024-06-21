@@ -18,7 +18,16 @@ import Link from "next/link";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ["Profile", "Dashboard", "Wishlist", "Log Out"];
+  const menuItems = [
+    "Electronics",
+    "Jewelery",
+    "Men's Clothing",
+    "Women's Clothing",
+    "Profile",
+    "Dashboard",
+    "Wishlist",
+    "Log Out",
+  ];
 
   return (
     <div>
@@ -97,17 +106,7 @@ export default function NavBar() {
         <NavbarMenu>
           {menuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className='w-full'
-                color={
-                  index === 2
-                    ? "warning"
-                    : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href='#'
-              >
+              <Link className='w-full' href='#'>
                 {item}
               </Link>
             </NavbarMenuItem>
