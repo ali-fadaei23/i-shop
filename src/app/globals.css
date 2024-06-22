@@ -1,3 +1,42 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.slick-next {
+    margin-right: 50px;
+    color: black;
+}
+
+.slick-prev {
+    margin-left: 50px;
+    display: flex;
+    z-index: 1;
+}
+
+ul.slick-dots {
+    position: absolute;
+    bottom: 10px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+ul.slick-dots li.slick-active button::before {
+    color: #f5f5f5;
+}
+
+ul.slick-dots li button::before {
+    font-size: 8px;
+    content: "•";
+    text-align: center;
+    opacity: 0.5;
+    color: #558150;
+}
+
+.slick-arrow.slick-prev::before,
+.slick-arrow.slick-next::before {
+    content: " ";
+}
