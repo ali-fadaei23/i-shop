@@ -12,30 +12,35 @@ export default function Home() {
   useEffect(() => {
     const sendRequest = async () => {
       const response = await fetch("https://fakestoreapi.com/products");
-
       const responseData = await response.json();
       setProducts(responseData);
       setLoadingProduct(false);
     };
     sendRequest();
   }, []);
-  console.log(products);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between'>
-      <Slider />
+    <main className='flex flex-col items-center justify-between'>
       <>
         {loadingProduct ? (
-          <div className='absolute left-0 top-0 w-screen h-screen bg-neutral-900'>
-            <CircularProgress className='absolute left-1/2 top-1/2' />
+          <div className='absolute left-0 top-0 w-screen h-screen opacity-40 flex items-center justify-center'>
+            <CircularProgress
+              size='lg'
+              color='primary'
+              label='Now Loading'
+              className='absolute left-1/2 top-1/2 text-black'
+            />
           </div>
         ) : (
-          <div className='products'>
-            <span className='text-6xl font-extrabold flex items-center justify-center py-8'>
-              All Products
-            </span>
-            <ProductList products={products} />
-          </div>
+          <>
+            <Slider />
+            <div className='products'>
+              <span className='text-7xl text-primary-500 font-extrabold flex items-center justify-center py-8'>
+                All Products
+              </span>
+              <ProductList products={products} />
+            </div>
+          </>
         )}
       </>
     </main>

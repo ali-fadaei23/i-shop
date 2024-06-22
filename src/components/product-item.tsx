@@ -68,7 +68,7 @@ export default function ProductItem(props: {
               src={image}
               width={100}
               height={100}
-              className='w-60 h-44 relative hover:opacity-90 z-10 object-contain object-center'
+              className='w-60 h-44 relative hover:opacity-90 z-10 object-contain'
               alt='Card image'
               title={title}
             />
