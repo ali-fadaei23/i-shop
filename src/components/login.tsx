@@ -12,10 +12,12 @@ import LoginImage from "../assets/login-image.png";
 
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAuth, useProvideAuth } from "@/shared/auth/auth-context";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
   let auth = useAuth();
   const Auth = useProvideAuth();
   const [isVisible, setIsVisible] = useState(false);
@@ -27,6 +29,12 @@ export default function Login() {
     event.preventDefault();
     Auth.handleLogin(username, password);
   };
+
+  useEffect(() => {
+    if (Auth.user && !Auth.loading) {
+      router.push("/");
+    }
+  }, [Auth.user, Auth.loading, router]);
   return (
     <>
       <Card className='w-full sm:w-1/2 h-full'>
