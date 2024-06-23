@@ -6,6 +6,9 @@ import { CircularProgress } from "@nextui-org/react";
 import Image from "next/image";
 
 export default function Home() {
+  // const [categoryItem, setCategoryItem] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
   const [products, setProducts] = useState([]);
   const [loadingProduct, setLoadingProduct] = useState(true);
 
