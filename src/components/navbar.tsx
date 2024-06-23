@@ -62,13 +62,17 @@ export default function NavBar() {
 
         <NavbarContent className='sm:hidden pr-3' justify='center'>
           <NavbarBrand>
-            <Image src={BrandLogo} width={64} height={64} alt='Brand Logo' />
+            <Link href={"/"}>
+              <Image src={BrandLogo} width={64} height={64} alt='Brand Logo' />
+            </Link>
           </NavbarBrand>
         </NavbarContent>
 
         <NavbarContent className='hidden sm:flex gap-4' justify='center'>
           <NavbarBrand>
-            <Image src={BrandLogo} width={64} height={64} alt='Brand Logo' />
+            <Link href={"/"}>
+              <Image src={BrandLogo} width={64} height={64} alt='Brand Logo' />
+            </Link>
           </NavbarBrand>
           <NavbarItem>
             <Link color='foreground' href='#'>
@@ -93,8 +97,9 @@ export default function NavBar() {
         </NavbarContent>
 
         <NavbarContent justify='end'>
-          <NavbarItem className='hidden lg:flex'>
-            <Link href='#'>Sign in</Link>
+          <NavbarItem className='hidden lg:flex'></NavbarItem>
+          <NavbarItem>
+              <Link className="hover:text-primary-500" href={"/login"}>Sign in</Link>
           </NavbarItem>
         </NavbarContent>
 

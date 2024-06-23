@@ -1,8 +1,14 @@
+"use client";
 import { Card, Input, CardBody, Button, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
 import LoginImage from "../assets/login-image.png";
+import Link from "next/link";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Login() {
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
   return (
     <>
       <Card className='w-full sm:w-1/2 h-full'>
@@ -36,12 +42,21 @@ export default function Login() {
                 placeholder='Enter your username'
               />
               <Input
-                classNames={{
-                  label:
-                    "text-xl font-semibold group-data-[filled-within=true]:text-primary-500",
-                }}
+                endContent={
+                  <button
+                    className='focus:outline-none'
+                    type='button'
+                    onClick={toggleVisibility}
+                  >
+                    {isVisible ? (
+                      <FaEyeSlash className='text-2xl text-primary-500 pointer-events-none' />
+                    ) : (
+                      <FaEye className='text-2xl text-primary-500 pointer-events-none' />
+                    )}
+                  </button>
+                }
+                type={isVisible ? "text" : "password"}
                 size='md'
-                type='password'
                 variant='underlined'
                 color='primary'
                 label='Password'
@@ -57,6 +72,14 @@ export default function Login() {
                 >
                   Login
                 </Button>
+              </div>
+              <div className='w-full flex items-center justify-center'>
+                <Link
+                  className='text-primary-500 hover:text-primary-700 font-semibold'
+                  href={"/signup"}
+                >
+                  {"Don't have an account? Sign Up"}
+                </Link>
               </div>
             </div>
           </div>

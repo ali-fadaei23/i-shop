@@ -40,9 +40,6 @@ export default function Home() {
               </span>
               <ProductList products={products} />
             </div>
-            <div className='w-full flex items-center justify-center py-4'>
-              <Login />
-            </div>
           </>
         )}
       </>
