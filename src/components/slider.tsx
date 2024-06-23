@@ -22,7 +22,7 @@ function NextArrow(props: any) {
       }}
       onClick={onClick}
     >
-      <BsArrowRightCircleFill className='min-w-9 min-h-9 text-neutral-100 hover:text-neutral-500 p-0 cursor-pointer border-none outline-none bg-transparent before:content-center' />
+      <BsArrowRightCircleFill className='min-w-9 min-h-9 text-primary-500 hover:text-primary-600 p-0 cursor-pointer border-none outline-none bg-transparent before:content-center' />
     </div>
   );
 }
@@ -40,7 +40,7 @@ function PrevArrow(props: any) {
       }}
       onClick={onClick}
     >
-      <BsArrowLeftCircleFill className='min-w-9 min-h-9 text-neutral-100 hover:text-neutral-500 p-0 cursor-pointer border-none outline-none bg-transparent before:content-center' />
+      <BsArrowLeftCircleFill className='min-w-9 min-h-9 text-primary-500 hover:text-primary-600 p-0 cursor-pointer border-none outline-none bg-transparent before:content-center' />
     </div>
   );
 }
