@@ -94,12 +94,7 @@ export default function NavBar() {
 
         <NavbarContent justify='end'>
           <NavbarItem className='hidden lg:flex'>
-            <Link href='#'>Login</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Button as={Link} href='#' variant='flat'>
-              Sign Up
-            </Button>
+            <Link href='#'>Sign in</Link>
           </NavbarItem>
         </NavbarContent>
 
