@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { NextUIProvider } from "@nextui-org/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/navbar";
-import { AuthContext, useProvideAuth } from "@/shared/auth/auth-context";
-import { Context } from "@/shared/context/context";
-import { useState } from "react";
+import Provider from "./provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,31 +15,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [categoryItem, setCategoryItem] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-  const auth = useProvideAuth();
-
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <NextUIProvider>
-          <AuthContext.Provider value={auth}>
-            <Context.Provider
-              value={{
-                cartItems,
-                setCartItems,
-                wishlist,
-                setWishlist,
-                categoryItem,
-                setCategoryItem,
-              }}
-            >
-              <NavBar />
-              {children}
-            </Context.Provider>
-          </AuthContext.Provider>
-        </NextUIProvider>
+        <Provider>
+          <NavBar />
+          {children}
+        </Provider>
       </body>
     </html>
   );

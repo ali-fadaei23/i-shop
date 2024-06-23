@@ -3,12 +3,9 @@ import { useEffect, useState } from "react";
 import ProductList from "@/components/product-list";
 import Slider from "@/components/slider";
 import { CircularProgress } from "@nextui-org/react";
-import Image from "next/image";
+import Login from "@/components/login";
 
 export default function Home() {
-  // const [categoryItem, setCategoryItem] = useState([]);
-  // const [cartItems, setCartItems] = useState([]);
-  // const [wishlist, setWishlist] = useState([]);
   const [products, setProducts] = useState([]);
   const [loadingProduct, setLoadingProduct] = useState(true);
 
@@ -43,6 +40,7 @@ export default function Home() {
               </span>
               <ProductList products={products} />
             </div>
+            <Login />
           </>
         )}
       </>
