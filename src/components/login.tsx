@@ -1,14 +1,32 @@
 "use client";
-import { Card, Input, CardBody, Button, CardFooter } from "@nextui-org/react";
+import {
+  Card,
+  Input,
+  CardBody,
+  Button,
+  CardFooter,
+  CircularProgress,
+} from "@nextui-org/react";
 import Image from "next/image";
 import LoginImage from "../assets/login-image.png";
+
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useAuth, useProvideAuth } from "@/shared/auth/auth-context";
 
 export default function Login() {
+  let auth = useAuth();
+  const Auth = useProvideAuth();
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    Auth.handleLogin(username, password);
+  };
   return (
     <>
       <Card className='w-full sm:w-1/2 h-full'>
@@ -40,8 +58,14 @@ export default function Login() {
                 color='primary'
                 label='Username'
                 placeholder='Enter your username'
+                value={username}
+                onValueChange={setUsername}
               />
               <Input
+                classNames={{
+                  label:
+                    "text-xl font-semibold group-data-[filled-within=true]:text-primary-500",
+                }}
                 endContent={
                   <button
                     className='focus:outline-none'
@@ -61,18 +85,32 @@ export default function Login() {
                 color='primary'
                 label='Password'
                 placeholder='Enter your password'
+                value={password}
+                onValueChange={setPassword}
               />
-              <div className='w-full flex items-center justify-center'>
+              <form
+                onSubmit={handleSubmit}
+                className='w-full flex items-center justify-center'
+              >
                 <Button
+                  type='submit'
                   size='lg'
                   className='w-full sm:w-1/3 font-semibold'
                   color='primary'
                   variant='ghost'
-                  onClick={() => console.log("Clicked")}
+                  disabled={Auth.loading}
                 >
                   Login
+                  {Auth.loading && (
+                    <CircularProgress
+                      size='lg'
+                      color='primary'
+                      label='Now Loading'
+                      className='absolute left-1/2 top-1/2 text-black'
+                    />
+                  )}
                 </Button>
-              </div>
+              </form>
               <div className='w-full flex items-center justify-center'>
                 <Link
                   className='text-primary-500 hover:text-primary-700 font-semibold'

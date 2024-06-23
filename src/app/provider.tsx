@@ -13,7 +13,6 @@ export default function Provider({
   const [categoryItem, setCategoryItem] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-
   return (
     <NextUIProvider>
       <AuthContext.Provider value={auth}>
