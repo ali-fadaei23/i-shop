@@ -1,8 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
-
+import {
+  BsFillPersonFill,
+  BsFillBookmarkHeartFill,
+  BsGridFill,
+  BsBoxArrowDown,
+} from "react-icons/bs";
 import BrandLogo from "../assets/brand-logo.svg";
+import AvatarImage from "../assets/women-clothes.jpg";
 import {
   Navbar,
   NavbarBrand,
@@ -12,22 +18,33 @@ import {
   NavbarContent,
   NavbarItem,
   Button,
+  AvatarIcon,
+  DropdownItem,
+  DropdownMenu,
+  Avatar,
+  DropdownTrigger,
+  Dropdown,
 } from "@nextui-org/react";
 import Link from "next/link";
+import { useAuth } from "@/shared/auth/auth-context";
 
+const menuItems = [
+  "Electronics",
+  "Jewelery",
+  "Men's Clothing",
+  "Women's Clothing",
+  "Profile",
+  "Dashboard",
+  "Wishlist",
+  "Log Out",
+];
 export default function NavBar() {
+  const auth = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = [
-    "Electronics",
-    "Jewelery",
-    "Men's Clothing",
-    "Women's Clothing",
-    "Profile",
-    "Dashboard",
-    "Wishlist",
-    "Log Out",
-  ];
+  // useEffect(() => {
+  //   setCartItems([]);
+  // }, [setCartItems]);
+  console.log(auth?.userInfo);
 
   return (
     <div>
@@ -95,13 +112,58 @@ export default function NavBar() {
             </Link>
           </NavbarItem>
         </NavbarContent>
-
-        <NavbarContent justify='end'>
-          <NavbarItem className='hidden lg:flex'></NavbarItem>
-          <NavbarItem>
-              <Link className="hover:text-primary-500" href={"/login"}>Sign in</Link>
-          </NavbarItem>
-        </NavbarContent>
+        {auth!.user ? (
+          <NavbarContent as='div' justify='end'>
+            <Dropdown placement='bottom-end'>
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as='button'
+                  className='transition-transform bg-primary-500'
+                  color='primary'
+                  name='Jason Hughes'
+                  size='md'
+                  src='https://i.pravatar.cc/150?u=a04258114e29026302d'
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label='Profile Actions' variant='flat'>
+                <DropdownItem key='profile' className='h-14 gap-2'>
+                  <p className='font-semibold'>Signed in as</p>
+                  <p className='font-semibold'>
+                    {auth?.userInfo !== null && auth?.userInfo.email}
+                  </p>
+                </DropdownItem>
+                <DropdownItem key='profile'>
+                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
+                    <BsFillPersonFill className="text-blue-500 text-lg" />
+                    Profile
+                  </div>
+                </DropdownItem>
+                <DropdownItem key='wishlist'>
+                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
+                    <BsFillBookmarkHeartFill className="text-blue-500 text-lg" />
+                    Wishlist
+                  </div>
+                </DropdownItem>
+                <DropdownItem key='logout' color='danger'>
+                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
+                    <BsBoxArrowDown className="text-blue-500 text-lg" />
+                    Log Out
+                  </div>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarContent>
+        ) : (
+          <NavbarContent justify='end'>
+            <NavbarItem className='hidden lg:flex'></NavbarItem>
+            <NavbarItem>
+              <Link className='hover:text-primary-500' href={"/login"}>
+                Sign in
+              </Link>
+            </NavbarItem>
+          </NavbarContent>
+        )}
 
         <NavbarMenu>
           {menuItems.map((item, index) => (

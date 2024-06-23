@@ -13,13 +13,12 @@ import LoginImage from "../assets/login-image.png";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
-import { useAuth, useProvideAuth } from "@/shared/auth/auth-context";
+import { useAuth } from "@/shared/auth/auth-context";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
-  let auth = useAuth();
-  const Auth = useProvideAuth();
+  const auth = useAuth();
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
   const [username, setUsername] = useState("");
@@ -27,14 +26,14 @@ export default function Login() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    Auth.handleLogin(username, password);
+    auth!.handleLogin(username, password);
   };
 
   useEffect(() => {
-    if (Auth.user && !Auth.loading) {
+    if (auth!.user && !auth!.loading) {
       router.push("/");
     }
-  }, [Auth.user, Auth.loading, router]);
+  }, [auth, router]);
   return (
     <>
       <Card className='w-full sm:w-1/2 h-full'>
@@ -106,11 +105,11 @@ export default function Login() {
                   className='w-full sm:w-1/3 font-semibold'
                   color='primary'
                   variant='ghost'
-                  isDisabled={Auth.loading}
+                  isDisabled={auth!.loading}
                 >
                   Login
                 </Button>
-                {Auth.loading && (
+                {auth!.loading && (
                   <CircularProgress
                     size='sm'
                     color='primary'

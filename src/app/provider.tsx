@@ -1,7 +1,7 @@
 "use client";
-import { AuthContext, useProvideAuth } from "@/shared/auth/auth-context";
-import { Context } from "@/shared/context/context";
-import { NextUIProvider } from "@nextui-org/react";
+import AuthProvider, { useAuth } from "@/shared/auth/auth-context";
+import ContextProvider from "@/shared/context/context";
+import { CircularProgress, NextUIProvider } from "@nextui-org/react";
 import { useState } from "react";
 
 export default function Provider({
@@ -9,26 +9,12 @@ export default function Provider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const auth = useProvideAuth();
-  const [categoryItem, setCategoryItem] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  const auth = useAuth();
   return (
     <NextUIProvider>
-      <AuthContext.Provider value={auth}>
-        <Context.Provider
-          value={{
-            cartItems,
-            setCartItems,
-            wishlist,
-            setWishlist,
-            categoryItem,
-            setCategoryItem,
-          }}
-        >
-          {children}
-        </Context.Provider>
-      </AuthContext.Provider>
+      <AuthProvider>
+        <ContextProvider>{children}</ContextProvider>
+      </AuthProvider>
     </NextUIProvider>
   );
 }

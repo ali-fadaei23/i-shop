@@ -1,17 +1,40 @@
-import React, { createContext, useState, useContext, FC } from "react";
+"use client";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  PropsWithChildren,
+  useEffect,
+} from "react";
 import * as jose from "jose";
+import { CircularProgress } from "@nextui-org/react";
 
 type UserId = string | null | undefined;
 
-export const AuthContext = createContext({});
+type UserInfo = {
+  address: {
+    city: string;
+    geolocation: {
+      lat: string;
+      long: string;
+    };
+    number: number;
+    street: string;
+    zipcode: string;
+  };
+  email: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  password: string;
+  phone: string;
+  username: string;
+} | null;
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export const useProvideAuth = () => {
+const useProvideAuth = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<UserInfo>(null);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState<UserId>(null);
   const [errors, setErrors] = useState([]);
@@ -141,3 +164,31 @@ export const useProvideAuth = () => {
     loading,
   };
 };
+
+const AuthContext = createContext<
+  ReturnType<typeof useProvideAuth> | undefined
+>(undefined);
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export default function AuthProvider({ children }: PropsWithChildren) {
+  const value = useProvideAuth();
+  return (
+    <AuthContext.Provider value={value}>
+      {value === undefined && value === null ? (
+        <div className='absolute left-0 top-0 w-screen h-screen opacity-40 flex items-center justify-center'>
+          <CircularProgress
+            size='lg'
+            color='primary'
+            label='Now Loading'
+            className='absolute left-1/2 top-1/2 text-black'
+          />
+        </div>
+      ) : (
+        <>{children}</>
+      )}
+    </AuthContext.Provider>
+  );
+}
