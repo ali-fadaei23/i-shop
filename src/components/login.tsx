@@ -106,18 +106,17 @@ export default function Login() {
                   className='w-full sm:w-1/3 font-semibold'
                   color='primary'
                   variant='ghost'
-                  disabled={Auth.loading}
+                  isDisabled={Auth.loading}
                 >
                   Login
-                  {Auth.loading && (
-                    <CircularProgress
-                      size='lg'
-                      color='primary'
-                      label='Now Loading'
-                      className='absolute left-1/2 top-1/2 text-black'
-                    />
-                  )}
                 </Button>
+                {Auth.loading && (
+                  <CircularProgress
+                    size='sm'
+                    color='primary'
+                    className='absolute text-black'
+                  />
+                )}
               </form>
               <div className='w-full flex items-center justify-center'>
                 <Link
