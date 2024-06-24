@@ -79,8 +79,8 @@ export default function ProductItem(props: {
           className='w-px h-px block'
           style={{ marginLeft: "0.25rem", marginTop: "0.5rem" }}
         />
-        <div className='flex flex-col gap-2 px-2'>
-          <p className='text-xs font-normal'>{category}</p>
+        <div className='flex flex-col gap-2 px-2 mt-2'>
+          <p className='text-xs text-gray-500 font-normal'>{category}</p>
           <p className='text-sm max-h-fit overflow-hidden font-extralight truncate'>
             {title}
           </p>

@@ -50,7 +50,7 @@ export default function Login() {
             </div>
             <div className='w-full sm:w-1/2 flex flex-col items-center justify-center mx-5 gap-5'>
               <div>
-                <span className='text-4xl py-5 font-bold text-primary-500'>
+                <span className='text-6xl py-5 font-extrabold text-primary-500'>
                   Login
                 </span>
               </div>

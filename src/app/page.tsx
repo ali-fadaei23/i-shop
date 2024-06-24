@@ -35,7 +35,7 @@ export default function Home() {
           <>
             <Slider />
             <div className='products'>
-              <span className='text-7xl text-primary-500 font-extrabold flex items-center justify-center py-8'>
+              <span className='text-8xl text-primary-500 font-bold flex items-center justify-center py-8'>
                 All Products
               </span>
               <ProductList products={products} />
