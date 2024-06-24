@@ -20,10 +20,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className='flex flex-col items-center justify-between'>
+    <main className='flex flex-col flex-1 items-center justify-between'>
       <>
         {loadingProduct ? (
-          <div className='absolute left-0 top-0 w-screen h-screen opacity-40 flex items-center justify-center'>
+          <div className='relative z-[90] w-screen h-[90vh] opacity-40 flex items-center justify-center'>
             <CircularProgress
               size='lg'
               color='primary'

@@ -6,6 +6,7 @@ import NavBar from "@/components/navbar";
 import Provider from "./provider";
 import ContextProvider from "@/shared/context/context";
 import AuthProvider from "@/shared/auth/auth-context";
+import Footer from "@/components/footer";
 const myFont = localFont({ src: "../assets/fonts/FonartoLight-BWxv3.ttf" });
 
 export const metadata: Metadata = {
@@ -20,10 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={myFont.className}>
+      <body className={`${myFont.className} h-screen`}>
         <Provider>
           <NavBar />
           {children}
+          <Footer />
         </Provider>
       </body>
     </html>
