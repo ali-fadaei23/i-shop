@@ -33,10 +33,6 @@ const menuItems = [
   "Jewelery",
   "Men's Clothing",
   "Women's Clothing",
-  "Profile",
-  "Dashboard",
-  "Wishlist",
-  "Log Out",
 ];
 export default function NavBar() {
   const auth = useAuth();
@@ -121,33 +117,39 @@ export default function NavBar() {
                   as='button'
                   className='transition-transform bg-primary-500'
                   color='primary'
-                  name='Jason Hughes'
+                  name='John doe'
                   size='md'
                   src='https://i.pravatar.cc/150?u=a04258114e29026302d'
                 />
               </DropdownTrigger>
               <DropdownMenu aria-label='Profile Actions' variant='flat'>
                 <DropdownItem key='profile' className='h-14 gap-2'>
-                  <p className='font-semibold'>Signed in as</p>
-                  <p className='font-semibold'>
-                    {auth?.userInfo !== null && auth?.userInfo.email}
-                  </p>
+                  <div className='flex flex-col'>
+                    <p className='font-semibold'>Signed in as</p>
+                    <p className='font-semibold'>
+                      {auth?.userInfo !== null && auth?.userInfo.email}
+                    </p>
+                  </div>
                 </DropdownItem>
-                <DropdownItem key='profile'>
-                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
-                    <BsFillPersonFill className="text-blue-500 text-lg" />
+                <DropdownItem key='profile' color='primary'>
+                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
+                    <BsFillPersonFill className='text-medium' />
                     Profile
                   </div>
                 </DropdownItem>
-                <DropdownItem key='wishlist'>
-                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
-                    <BsFillBookmarkHeartFill className="text-blue-500 text-lg" />
+                <DropdownItem showDivider key='wishlist' color='primary'>
+                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
+                    <BsFillBookmarkHeartFill className='text-medium' />
                     Wishlist
                   </div>
                 </DropdownItem>
-                <DropdownItem key='logout' color='danger'>
-                  <div className='flex items-center flex-row justify-start gap-3 text-lg'>
-                    <BsBoxArrowDown className="text-blue-500 text-lg" />
+                <DropdownItem
+                  key='logout'
+                  color='danger'
+                  onClick={() => auth?.signOut()}
+                >
+                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
+                    <BsBoxArrowDown className='text-medium' />
                     Log Out
                   </div>
                 </DropdownItem>
