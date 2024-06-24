@@ -125,31 +125,37 @@ export default function NavBar() {
               <DropdownMenu aria-label='Profile Actions' variant='flat'>
                 <DropdownItem key='profile' className='h-14 gap-2'>
                   <div className='flex flex-col'>
-                    <p className='font-semibold'>Signed in as</p>
-                    <p className='font-semibold'>
+                    <p className='font-normal text-medium'>Signed in as</p>
+                    <p className='font-semibold text-medium'>
                       {auth?.userInfo !== null && auth?.userInfo.email}
                     </p>
                   </div>
                 </DropdownItem>
-                <DropdownItem key='profile' color='primary'>
-                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
-                    <BsFillPersonFill className='text-medium' />
+                <DropdownItem className='' key='profile' color='default'>
+                  <div className='flex items-center flex-row text-primary-500 justify-between gap-3 text-medium'>
+                    <BsFillPersonFill className='text-large' />
                     Profile
                   </div>
                 </DropdownItem>
-                <DropdownItem showDivider key='wishlist' color='primary'>
-                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
-                    <BsFillBookmarkHeartFill className='text-medium' />
+                <DropdownItem
+                  className=''
+                  showDivider
+                  key='wishlist'
+                  color='default'
+                >
+                  <div className='flex items-center flex-row text-primary-500 justify-between gap-3 text-medium'>
+                    <BsFillBookmarkHeartFill className='text-large' />
                     Wishlist
                   </div>
                 </DropdownItem>
                 <DropdownItem
+                  className=''
                   key='logout'
                   color='danger'
                   onClick={() => auth?.signOut()}
                 >
-                  <div className='flex items-center flex-row justify-start gap-3 text-medium'>
-                    <BsBoxArrowDown className='text-medium' />
+                  <div className='flex items-center flex-row justify-between text-primary-500 hover:text-danger-500 gap-3 text-medium'>
+                    <BsBoxArrowDown className='text-large' />
                     Log Out
                   </div>
                 </DropdownItem>
