@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/navbar";
 import Provider from "./provider";
 import ContextProvider from "@/shared/context/context";
 import AuthProvider from "@/shared/auth/auth-context";
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({ src: "../assets/fonts/FonartoLight-BWxv3.ttf" });
 
 export const metadata: Metadata = {
   title: "iShop",
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={myFont.className}>
         <Provider>
           <NavBar />
           {children}
