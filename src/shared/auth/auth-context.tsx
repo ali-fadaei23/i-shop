@@ -22,6 +22,7 @@ type UserInfo = {
     street: string;
     zipcode: string;
   };
+  id: number;
   email: string;
   name: {
     firstname: string;

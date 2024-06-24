@@ -31,7 +31,7 @@ export default function Login() {
 
   useEffect(() => {
     if (auth!.user && !auth!.loading) {
-      router.push("/");
+      router.push(`/`);
     }
   }, [auth, router]);
   return (
