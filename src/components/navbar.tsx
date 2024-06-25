@@ -29,15 +29,22 @@ import Link from "next/link";
 import { useAuth } from "@/shared/auth/auth-context";
 import { usePathname } from "next/navigation";
 
+type Categories = string[];
+
 const menuItems = [
   "Electronics",
   "Jewelery",
   "Men's Clothing",
   "Women's Clothing",
 ];
-type Categories = string[];
+
 export default function NavBar() {
   const pathname = usePathname();
+  const pathArray = pathname.split("/");
+  const categoryLink = pathArray[pathArray.length - 1];
+  const activeLink = decodeURI(categoryLink);
+  console.log(activeLink);
+
   const auth = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState<Categories>([]);
@@ -52,17 +59,17 @@ export default function NavBar() {
         `https://fakestoreapi.com/products/categories`
       );
       const responseData = await response.json();
-
       setCategories(responseData);
       setLoadingCategories(false);
     };
     sendRequest();
   }, []);
+
   return (
     <div>
       <Navbar
+        maxWidth='full'
         classNames={{
-          wrapper: "max-w-full w-full",
           item: [
             "flex",
             "relative",
@@ -74,9 +81,9 @@ export default function NavBar() {
             "data-[active=true]:after:bottom-0",
             "data-[active=true]:after:left-0",
             "data-[active=true]:after:right-0",
-            "data-[active=true]:after:h-[2px]",
+            "data-[active=true]:after:h-[3px]",
             "data-[active=true]:after:rounded-[2px]",
-            "data-[active=true]:after:bg-primary",
+            "data-[active=true]:after:bg-[#CE8E32]",
           ],
         }}
         isBordered
@@ -104,9 +111,11 @@ export default function NavBar() {
             </Link>
           </NavbarBrand>
           {categories.map((v, index) => {
+            // console.log(pathname, "++++++", v);
+
             return (
               <NavbarItem
-                isActive={pathname.startsWith(`/${v}`) ? true : false}
+                isActive={activeLink === `${v}` ? true : false}
                 key={`${index}-categories`}
               >
                 <Link className='capitalize' href={`/${v}`}>

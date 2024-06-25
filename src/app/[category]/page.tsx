@@ -39,7 +39,7 @@ export default function CategoryPages() {
           <>
             <div className='products'>
               <span className='text-8xl capitalize text-primary-500 font-bold flex items-center justify-center py-8'>
-                All {categoryName}
+                {categoryName}
               </span>
               <ProductList products={category} />
             </div>
