@@ -27,6 +27,7 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { useAuth } from "@/shared/auth/auth-context";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   "Electronics",
@@ -34,14 +35,29 @@ const menuItems = [
   "Men's Clothing",
   "Women's Clothing",
 ];
+type Categories = string[];
 export default function NavBar() {
+  const pathname = usePathname();
   const auth = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [categories, setCategories] = useState<Categories>([]);
+  const [loadingCategories, setLoadingCategories] = useState(false);
   // useEffect(() => {
   //   setCartItems([]);
   // }, [setCartItems]);
-  console.log(auth?.userInfo);
 
+  useEffect(() => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        `https://fakestoreapi.com/products/categories`
+      );
+      const responseData = await response.json();
+
+      setCategories(responseData);
+      setLoadingCategories(false);
+    };
+    sendRequest();
+  }, []);
   return (
     <div>
       <Navbar
@@ -87,26 +103,18 @@ export default function NavBar() {
               <Image src={BrandLogo} width={64} height={64} alt='Brand Logo' />
             </Link>
           </NavbarBrand>
-          <NavbarItem>
-            <Link color='foreground' href='#'>
-              Electronics
-            </Link>
-          </NavbarItem>
-          <NavbarItem isActive>
-            <Link href='#' aria-current='page'>
-              Jewelery
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href='#' aria-current='page'>
-              Men&apos;s Clothing
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href='#' aria-current='page'>
-              Women&apos;s Clothing
-            </Link>
-          </NavbarItem>
+          {categories.map((v, index) => {
+            return (
+              <NavbarItem
+                isActive={pathname.startsWith(`/${v}`) ? true : false}
+                key={`${index}-categories`}
+              >
+                <Link className='capitalize' href={`/${v}`}>
+                  {v}
+                </Link>
+              </NavbarItem>
+            );
+          })}
         </NavbarContent>
         {auth!.user ? (
           <NavbarContent as='div' justify='end'>
